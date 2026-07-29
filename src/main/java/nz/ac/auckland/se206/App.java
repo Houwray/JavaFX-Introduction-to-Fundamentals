@@ -14,14 +14,16 @@ public class App extends Application {
     launch();
   }
 
-  private static Parent loadFXML(String fxml) throws IOException {
+  public static Parent loadFXML(String fxml) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml"));
     return fxmlLoader.load();
   }
 
   @Override
   public void start(Stage stage) throws IOException {
-    scene = new Scene(loadFXML("counter"), 640, 480);
+    SceneManager.addUi(SceneManager.AppUi.MUSIC_PLAYER, loadFXML("musicplayer"));
+    SceneManager.addUi(SceneManager.AppUi.COUNTER, loadFXML("counter"));
+    scene = new Scene(SceneManager.getUiRoot(SceneManager.AppUi.MUSIC_PLAYER), 640, 480);
     stage.setScene(scene);
     stage.show();
   }
